@@ -42,7 +42,11 @@ def connectRedis():
 	global r
 	if r is None:
 		settings = get_project_settings()
-		r = redis.StrictRedis(host = settings.get('REDIS_HOST'), port = settings.get('REDIS_PORT'))
+		r = redis.StrictRedis(
+			host = settings.get('REDIS_HOST'), 
+			port = settings.get('REDIS_PORT'),
+			password = settings.get('REDIS_PASSWORD')
+		)
 	return r
 
 

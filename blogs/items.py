@@ -10,9 +10,10 @@ import scrapy
 
 class BlogsItem(scrapy.Item):
     # define the fields for your item here like:
+    author_id = scrapy.Field()
+    rule_id = scrapy.Field()
     url = scrapy.Field()
     title = scrapy.Field()
     body = scrapy.Field()
-    author = scrapy.Field()
     publish_time = scrapy.Field()
     pass

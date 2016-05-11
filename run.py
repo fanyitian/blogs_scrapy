@@ -3,8 +3,12 @@
 
 '''scrapy 全量爬取blog
 
-日期：2016-04-27
-作者：Fan Yitian
+@date：2016-04-27
+@author：Fan Yitian
+@version: 0.1.1
+@brief: 
+	命令行接收rule_id参数，根据rule来爬取blog
+	`python run.py 1 2 3`
 '''
 
 # 标准库
@@ -21,6 +25,14 @@ from blogs.spiders.common import CommonSpider
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+rule_ids = []
+# 检查命令行参数
+for i in range(1, len(sys.argv)):
+	rule_ids.append(int(sys.argv[i]))
+if not rule_ids:
+	print('rules id is empty, please input the integer argv.\nlike: `python run.py 1 22 33`')
+	exit(1)
+
 
 # crawl settings
 settings = get_project_settings()
@@ -34,7 +46,7 @@ settings.set("ITEM_PIPELINES", {
 process = CrawlerProcess(settings)
 
 # 获取rules
-rules = model.getRules()
+rules = model.getRulesByRuleIds(rule_ids)
 for rule in rules:
 	process.crawl(CommonSpider, rule)
 process.start()

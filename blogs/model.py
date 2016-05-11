@@ -24,3 +24,29 @@ def getRules():
 	rules = [dict(id=row[0], name=row[1], allow_domains=row[2], start_urls=row[3], next_page=row[4], allow_url=row[5],\
 		 extract_from=row[6], title_xpath=row[7], body_xpath=row[8], publish_time_xpath=row[9], author_xpath=row[10]) for row in gl.db.fetchAllRows()]
 	return rules
+
+def getRuleById(ruleId):
+	"""根据id获取rule
+	"""
+	rules = getRulesByRuleIds([ruleId])
+	return rules[0] if rules else None
+
+
+def getRulesByRuleIds(ruleIds):
+	"""根据rule_id获取rule
+
+	Args:
+		ruleIds list 		规则ids
+
+	Returns:
+		rule list.
+	"""
+	ruleIds = [str(i) for i in ruleIds]
+
+	sql = "select id, author_id, allow_domains, start_urls, next_page, allow_url, extract_from, \
+		title_xpath, body_xpath, publish_time_xpath from rules where id in (%s)" % (','.join(ruleIds))
+	gl.db.query(sql)
+
+	rules = [dict(id=row[0], author_id=row[1], allow_domains=row[2], start_urls=row[3], next_page=row[4], allow_url=row[5],\
+		 extract_from=row[6], title_xpath=row[7], body_xpath=row[8], publish_time_xpath=row[9]) for row in gl.db.fetchAllRows()]
+	return rules
