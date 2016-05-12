@@ -89,12 +89,15 @@ class TestForPipeline(object):
 		# print("item: ......")
 		# pprint.pprint(item)
 
-		print('--------------- item --------------')
-		print("url: %s" % item['url'])
-		print("pub_time: %s" % item['publish_time'])
-		print("title: %s" % (item['title']))
-		print("body: %s ......" % (item['body'][:100]))
+		loginfo = []
+		loginfo.append('--------------- item --------------')
+		loginfo.append("url: %s" % item['url'])
+		loginfo.append("pub_time: %s" % item['publish_time'])
+		loginfo.append("title: %s" % (item['title']))
+		loginfo.append("body: %s ......\n" % (item['body'][:100]))
 
+		spider.logger.info("test_process_item: %s" % (','.join(loginfo)))
+		print("\n".join(loginfo))
 
 		spider.close_down = True
 		return item

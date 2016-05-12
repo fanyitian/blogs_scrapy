@@ -9,6 +9,7 @@
 
 # 标准库
 import sys
+import time
 
 # 第三方库
 from scrapy.crawler import CrawlerProcess
@@ -26,8 +27,9 @@ settings = get_project_settings()
 settings.set("ITEM_PIPELINES", {
    'blogs.pipelines.TestForPipeline': 300
 })
-settings.set("LOG_LEVEL", "INFO")
-settings.set("LOG_FILE", "log/run_test.log")
+logName = "log/run_test_%s.log" % (time.strftime("%F"))
+settings.set("LOG_LEVEL", 'INFO')
+settings.set("LOG_FILE", logName)
 
 
 # 检查命令行参数
