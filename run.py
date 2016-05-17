@@ -41,6 +41,8 @@ settings.set("ITEM_PIPELINES", {
    'blogs.pipelines.DuplicatesPipeline': 200,
    'blogs.pipelines.DdPipeline': 300,
 })
+logName = "log/run_%s.log" % (time.strftime("%F"))
+settings.set("LOG_FILE", logName)
 
 
 process = CrawlerProcess(settings)

@@ -91,12 +91,12 @@ class TestForPipeline(object):
 
 		loginfo = []
 		loginfo.append('--------------- item --------------')
-		loginfo.append("url: %s" % item['url'])
-		loginfo.append("pub_time: %s" % item['publish_time'])
-		loginfo.append("title: %s" % (item['title']))
-		loginfo.append("body: %s ......\n" % (item['body'][:100]))
+		loginfo.append("[url]: %s" % item['url'])
+		loginfo.append("[pub_time]: %s" % item['publish_time'])
+		loginfo.append("[title]: %s" % (item['title']))
+		loginfo.append("[body]: %s ......\n" % (item['body'][:100]))
 
-		spider.logger.info("test_process_item: %s" % (','.join(loginfo)))
+		spider.logger.info("test_process_item: %s" % (',\t'.join(loginfo)))
 		print("\n".join(loginfo))
 
 		spider.close_down = True
